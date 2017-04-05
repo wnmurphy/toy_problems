@@ -1,3 +1,5 @@
+// TODO: In progress
+
 
 // var root1 = new Tree(1);
 // var branch2 = root1.addChild(2);
@@ -57,12 +59,7 @@ Tree.prototype.BFSelect = function (filter, depth) {
 };
 
 
-
-
-/**
- * You shouldn't need to change anything below here, but feel free to look.
- */
-
+// Helpers...
 var Queue = function() {
   var storage = [];
   this.enqueue = function(item) {
@@ -73,10 +70,6 @@ var Queue = function() {
   };
 };
 
-/**
-  * add an immediate child
-  * (wrap values in Tree nodes if they're not already)
-  */
 Tree.prototype.addChild = function(child){
   if (!child || !(child instanceof Tree)){
     child = new Tree(child);
@@ -91,10 +84,6 @@ Tree.prototype.addChild = function(child){
   return child;
 };
 
-/**
-  * check to see if the provided tree is already a child of this
-  * tree __or any of its sub trees__
-  */
 Tree.prototype.isDescendant = function(child){
   if(this.children.indexOf(child) !== -1){
     // `child` is an immediate child of this tree
@@ -110,9 +99,6 @@ Tree.prototype.isDescendant = function(child){
   }
 };
 
-/**
-  * remove an immediate child
-  */
 Tree.prototype.removeChild = function(child){
   var index = this.children.indexOf(child);
   if(index !== -1){
