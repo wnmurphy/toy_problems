@@ -1,22 +1,30 @@
 /*
   Selection Sort
   O(n^2)
-  Think: "Manually sorting a hand of playing cards."
 
-  Consider an array to consist of two subarrays, the left subarray sorted and the right unsorted.
-  Start on the second element x of the array, since the first element can be considered a sorted subarray. 
-  Loop over the left subarray to find the index in the left subarray where x belongs, and insert x.
+  Insertion sort: the inner (faster) loop iterates over sorted elements. "Where to INSERT?"
+  Selection sort: the inner (faster) loop iterates over unsorted elements to 'select' the smallest. "Which to SELECT?"
 
+  For each position i in an array.
+    Find the smallest element in the rest of the array at position s
+    Swap the element at s with the element at position i.
+    Etc.
 */
 
 var selectionSort = function (arr) {
-  for (var i = 1; i < arr.length; i++) { // i is card to insert
-    for (var j = 0; j < i; j++) { // j is position in left (sorted) subarray
-      if (arr[i] <= arr[j]) {
-        arr.splice(j,  null, arr.splice(i,1)[0] ); // remove i, insert before j
-      } else {
-        arr.splice(j+1,  null, arr.splice(i,1)[0] );
+  var s = 0, hold;
+  // For each position i
+  for (var i = 0; i < arr.length; i++) {
+    // Find the index s of the smallest element in the rest of the array.
+    for (var j = i+1; j < arr.length; j++) {
+      if (arr[j] < arr[s]) {
+        s = j;
       }
+    }
+    // If smallest is less than current sorted element, swap.
+    if (arr[s] < arr[i]) {
+      hold = arr.splice(s, 1)[0];
+      arr.splice(i, null, hold);
     }
   }
   return arr;
