@@ -29,6 +29,21 @@ function deepEquals (a, b) {
         return false;
       }
     }
+  // Handle arrays
+  } else if ( Array.isArray(a) && Array.isArray(b) ) {
+    if (a.length !== b.length) {
+      return false;
+    } else {
+      for (var i = 0; i < a.length; i++) {
+        if (a[i].toString() === "object Object" && b[i].toString() === "object Object") {
+          return deepEquals(a[i], b[i]);
+        } else if ( Array.isArray(a[i]) && Array.isArray(b[i]) ) {
+          return deepEquals(a[i], b[i]);
+        } else if (a[i] !== b[i]) {
+          return false;
+        }
+      }
+    }
   // Otherwise, a and b are values. Compare them...
   } else {
     if (a !== b) {
